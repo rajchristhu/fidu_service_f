@@ -76,8 +76,10 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       children: [
                         ClipRRect(
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(18.0),
-                              bottomRight: Radius.circular(18.0)),
+                              topLeft: Radius.circular(14.0),
+                              topRight: Radius.circular(2.0),
+                              bottomLeft: Radius.circular(2.0),
+                              bottomRight: Radius.circular(14.0)),
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             width: 90,

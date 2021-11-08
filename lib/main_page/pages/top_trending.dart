@@ -33,6 +33,8 @@ class _TopTrendingState extends State<TopTrending> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          color:     whiteColor,
+
           padding: const EdgeInsets.only(right: 16, left: 16),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

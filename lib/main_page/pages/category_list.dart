@@ -31,7 +31,7 @@ class _CategoryListState extends State<CategoryList> {
 
             SizedBox(
               child: Text(
-                "Top Offer",
+                "Top Deal",
                 style: TextStyle(
                     color: blackColor, fontSize: 16.0, fontWeight: FontWeight.w700),
               ),

@@ -18,7 +18,7 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
     check = true;
   }
 
-  List<String> carousalList = ["https://picsum.photos/200",
+  List<String> carousalList = ["https://picsum.photos/700",
     "https://picsum.photos/200"];
   int _current = 0;
 
@@ -36,22 +36,23 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
                 .map((item) => Container(
                       child: ClipRRect(
                           borderRadius:
-                              const BorderRadius.only(topLeft: Radius.circular(18.0),bottomRight: Radius.circular(18.0)),
+                              const BorderRadius.only(topLeft: Radius.circular(15.0),bottomRight: Radius.circular(15.0)),
+                              // const BorderRadius.all( Radius.circular(18.0)),
                           child: InkWell(
                             onTap: () {},
                             child: CachedNetworkImage(
                               width: MediaQuery.of(context).size.width,
-                              height: 150,
+                              height: 160,
                               imageUrl: item,
                               fit: BoxFit.cover,
                               placeholder: (context, url) => Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 150,
+                                height: 160,
                                 color: HexColor("#E2E2E2"),
                               ),
                               errorWidget: (context, url, error) => Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 150,
+                                height: 160,
                                 color: HexColor("#E2E2E2"),
                               ),
                             ),
@@ -61,7 +62,7 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
                 .toList(),
             carouselController: _controller,
             options: CarouselOptions(
-                height: 150.0,
+                height: 160.0,
                 enlargeCenterPage: true,
                 autoPlay: false,
                 aspectRatio: 2,
@@ -84,8 +85,8 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
               return GestureDetector(
                 onTap: () => _controller.animateToPage(entry.key),
                 child: Container(
-                  width: 20.0,
-                  height: 3.0,
+                  width: 15.0,
+                  height: 2.0,
                   margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2.0),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(18)),

@@ -23,9 +23,18 @@ class TopGrid extends StatelessWidget {
             Expanded(
               flex: 2,
                 child: Container(
+
                 padding: const EdgeInsets.only(
                     right: 10, left: 10, top: 10, bottom: 10),
-                child: CachedNetworkImage(
+                child:
+                ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(3.0),
+                        topRight: Radius.circular(3.0),
+                        bottomLeft: Radius.circular(3.0),
+                        bottomRight: Radius.circular(3.0)),
+                    child:
+                CachedNetworkImage(
                   fit: BoxFit.cover,
                   width: MediaQuery.of(context).size.width,
                   imageUrl: "https://picsum.photos/200",
@@ -37,6 +46,8 @@ class TopGrid extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     color: HexColor("#8AE2E2E2"),
                   ),
+                )
+
                 )))
             ,
             Expanded(

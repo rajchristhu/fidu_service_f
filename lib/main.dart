@@ -2,15 +2,19 @@ import 'package:fidu_service/util/separate.dart';
 import 'package:fidu_service/util/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
+import 'package:geolocator/geolocator.dart';
+import 'main_page/map/map.dart';
 import 'main_page/shop.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
+final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+Position? _currentPosition;
+String? _currentAddress;
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Fidu Service',
       theme: ThemeData(
         primaryColor: primaryColor,
-        textTheme: GoogleFonts.nunitoTextTheme(
+        textTheme: GoogleFonts.nunitoSansTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
@@ -29,6 +33,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -45,6 +50,37 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void initState() {
     super.initState();
     _page = 2;
+    _getCurrentLocation();
+
+  }
+  _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition!.latitude, _currentPosition!.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress =
+        "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -54,32 +90,34 @@ class _BottomNavBarState extends State<BottomNavBar> {
         endDrawer: SizedBox(
 
           width: MediaQuery.of(context).size.width *
-              0.70, // 75% of screen will be occupied
+              0.80, // 75% of screen will be occupied
           child: Drawer(
             child: Stack(
               children: [
                 Container(
+
                   height: MediaQuery.of(context).size.height,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
+                  decoration:  BoxDecoration(
+                    color: whiteColor,
                   ),
                   child: ListView(
 
-                    padding: EdgeInsets.zero,
+                    padding: EdgeInsets.only(top: 20),
                     children: <Widget>[
                       SafeArea(child:  Container(
-                        height: 50,
+padding: EdgeInsets.only(bottom: 0,left: 10),
                         child:  Row(
                           //mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
 
                             const Expanded(
                               flex: 0,
                               child: CircleAvatar(
-                                  radius: 40,
+                                  radius: 30,
                                   backgroundImage: NetworkImage('https://via.placeholder.com/140x100')
                               ),),
+                            SizedBox(width: 20,),
                             Expanded(
                                 flex: 2,
 
@@ -89,7 +127,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
                                   children:  [
                                     Text("Hello!",style: TextStyle(color: primaryColor,fontWeight: FontWeight.w600),),
-                                    Text("Maria Christhu Rajan fjhbfbhbhwebfhjewbfhb",style: TextStyle(overflow: TextOverflow.ellipsis),)
+                                    Text("Maria Christhu Rajan fjhbfbhbhwebfhjewbfhb",style: TextStyle(overflow: TextOverflow.ellipsis,fontWeight: FontWeight.w600),)
                                   ],)
                             ),
 
@@ -102,7 +140,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 
                       ListTile(
-                        onTap: (){},
+                        onTap: (){
+                          // getLocation();
+                        },
                         leading:  Icon(
                           Icons.history,
                           size: 22,
@@ -112,12 +152,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         //     "99+"
                         // ),
                         title:
-                        Align(
-                          child: Text(
-                            "Order History",style: TextStyle(color: blackColor,fontWeight: FontWeight.w500),
+                         Text(
+                            "Order History",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
-                          alignment: Alignment(-1.3, 0),
-                        ),
+
 
 
                       ),
@@ -132,28 +170,25 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         ),
                         title:
 
-                        Align(
-                          child: Text(
-                            "Support",style: TextStyle(color: blackColor,fontWeight: FontWeight.w500),
+
+                          Text(
+                            "Support",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
-                          alignment: Alignment(-1.2, 0),
-                        ),
+
 
                       ),
                       MySeparator(color: grayColor,),
 
                       ListTile(
                         onTap: (){},
+
                         leading:  Icon(
                           Icons.contact_support,
                           size: 22,
                           color: primaryColor,
                         ),
-                        title:  Align(
-                          child: Text(
-                            "Help",style: TextStyle(color: blackColor,fontWeight: FontWeight.w500),
-                          ),
-                          alignment: Alignment(-1.2, 0),
+                        title:  Text(
+                          "Help",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                         ),
 
 
@@ -168,12 +203,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           size: 22,
                           color: primaryColor,
                         ),
-                        title:  Align(
-                          child: Text(
-                            "Terms and Condition",style: TextStyle(color: blackColor,fontWeight: FontWeight.w500),
+                        title:   Text(
+                            "Terms and Condition",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
-                          alignment: Alignment(-1.7, 0),
-                        ),
 
 
 
@@ -187,12 +219,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           size: 22,
                           color: primaryColor,
                         ),
-                        title:  Align(
-                          child: Text(
-                            "Rate the Application",style: TextStyle(color: blackColor,fontWeight: FontWeight.w500),
+                        title:   Text(
+                            "Rate the Application",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
-                          alignment: Alignment(-1.6, 0),
-                        ),
 
 
 
@@ -206,14 +235,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   bottom: 30,
                     child: Container(
                       width: MediaQuery.of(context).size.width *
-                          0.70,
+                          0.80,
                       child:  Align(
                         alignment: Alignment.center,
                         child: Container(
                           child: RichText(
                             text: TextSpan(
                               text: 'Created By ',
-                              style: TextStyle(color: blackColor),
+                              style: TextStyle(color: blackColor,
+                                  fontSize:10,fontFamily: GoogleFonts.nunitoSans().fontFamily),
+
                               children:  <TextSpan>[
                                 TextSpan(text: 'CESEAGOD', style: TextStyle(fontWeight: FontWeight.bold,color: primaryColor)),
                               ],
@@ -229,62 +260,96 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ),
         appBar: AppBar(
+          toolbarHeight: 55,
+          elevation:0.3,
+          shadowColor: blackColor,
+          foregroundColor: whiteColor,
           actions: <Widget>[
             IconButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.menu, size: 22, color: whiteColor),
+                icon: Icon(Icons.menu_rounded, size: 23, color: blackColor),
                 onPressed: () {
                   _scaffoldKey.currentState!.openEndDrawer();
                 }),
           ],
           centerTitle: false,
-          title: Row(
+          title:  Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(
-                  flex: 0,
-                  child: InkWell(
-                    child: Icon(
-                      Icons.location_pin,
-                      size: 20,
-                    ),
-                  )),
-              const SizedBox(
-                width: 8,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                      flex: 0,
+                      child: InkWell(
+                        child: Icon(
+                          Icons.location_pin,
+                          color: primaryColor,
+                          size: 16,
+                        ),
+                      )),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: Text(
+"Location",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            color: blackColor,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500),
+                      ))
+                ],
               ),
-              Expanded(
-                  flex: 2,
-                  child: Text(
-                    " ServiceFidu ServiceFidu ServiceFidu ServiceFidu Service",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w700),
-                  ))
+              const SizedBox(
+                height: 4,
+              ),
+            _currentPosition != null &&
+                  _currentAddress != null?
+                Text(_currentAddress!,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    color: blackColor,
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w600),
+              ): Text("--",
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                  color: blackColor,
+                  fontSize: 13.0,
+                  fontWeight: FontWeight.w600),
+            ),
+
             ],
-          ),
-          backgroundColor: primaryColor,
+          )
+
+         ,
+          backgroundColor: whiteColor,
         ),
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: 2,
-          height: 70.0,
+          height: 55.0,
           items: <Widget>[
             Icon(
               Icons.more_vert_outlined,
-              size: 24,
+              size: 22,
               color: whiteColor,
             ),
-            Icon(Icons.shopping_cart_rounded, size: 24, color: whiteColor),
-            Icon(Icons.local_fire_department_sharp,
-                size: 24, color: whiteColor),
-            Icon(Icons.local_shipping_rounded, size: 24, color: whiteColor),
-            Icon(Icons.person_pin, size: 24, color: whiteColor),
+            Icon(Icons.shopping_cart_rounded, size: 22, color: whiteColor),
+            Icon(Icons.fastfood_rounded,
+                size: 22, color: whiteColor),
+            Icon(Icons.local_shipping_rounded, size: 22, color: whiteColor),
+            Icon(Icons.person_pin, size: 22, color: whiteColor),
           ],
-          color: primaryColor,
-          buttonBackgroundColor: primaryColor,
+          color: primaryColors,
+          buttonBackgroundColor: primaryColors,
           backgroundColor: Colors.transparent,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 500),
