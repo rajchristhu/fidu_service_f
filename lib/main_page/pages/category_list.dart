@@ -18,8 +18,11 @@ class CategoryList extends StatefulWidget {
 class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
-    List<String> carousalList = ["https://picsum.photos/200",
-      "https://picsum.photos/200"];
+    List<String> carousalList = ["https://static.vecteezy.com/system/resources/previews/001/254/978/original/creative-and-colorful-restaurant-food-social-media-banner-post-vector.jpg",
+      "https://thumbs.dreamstime.com/b/fast-food-creative-poster-design-set-web-graphics-modern-vector-illustration-npremium-quality-logo-concept-pictogram-76858679.jpg",
+      "https://c.neh.tw/thumb/f/720/4913631651168256.jpg"
+
+    ];
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,7 +36,7 @@ class _CategoryListState extends State<CategoryList> {
               child: Text(
                 "Top Deal",
                 style: TextStyle(
-                    color: blackColor, fontSize: 16.0, fontWeight: FontWeight.w700),
+                    color: blackColor, fontSize: 17.0, fontWeight: FontWeight.w700),
               ),
             ),
                 const SizedBox(
@@ -41,7 +44,7 @@ class _CategoryListState extends State<CategoryList> {
                 ),
             Container(
               width: 50.0,
-              height: 2.5,
+              height: 1,
               margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2.0),
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(18)),
@@ -115,10 +118,10 @@ class _CategoryListState extends State<CategoryList> {
                               ),
                             ),
                             const SizedBox(
-                              height: 12,
+                              height: 10,
                             ),
                             Text(
-                              "Crackers",
+                              "Offer Available",
                               style: TextStyle(
                                   color: blackColor,
                                   fontSize: 12,

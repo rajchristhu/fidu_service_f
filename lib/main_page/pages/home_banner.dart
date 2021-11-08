@@ -18,7 +18,9 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
     check = true;
   }
 
-  List<String> carousalList = ["https://picsum.photos/700",
+  List<String> carousalList = [
+    "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/05/Indore_Blog-1030x538.jpg",
+    "https://image.freepik.com/free-vector/flat-food-banner-template_23-2149048461.jpg",
     "https://picsum.photos/200"];
   int _current = 0;
 
@@ -35,8 +37,9 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
             items: carousalList
                 .map((item) => Container(
                       child: ClipRRect(
+
                           borderRadius:
-                              const BorderRadius.only(topLeft: Radius.circular(15.0),bottomRight: Radius.circular(15.0)),
+                              const BorderRadius.only(topLeft: Radius.circular(15.0),bottomRight: Radius.circular(15.0),topRight: Radius.circular(3.0),bottomLeft: Radius.circular(3.0)),
                               // const BorderRadius.all( Radius.circular(18.0)),
                           child: InkWell(
                             onTap: () {},
@@ -86,14 +89,14 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
                 onTap: () => _controller.animateToPage(entry.key),
                 child: Container(
                   width: 15.0,
-                  height: 2.0,
+                  height: 3.0,
                   margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2.0),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
                       shape: BoxShape.rectangle,
                       color: (_current == entry.key
                           ? primaryColor
-                          : grayColor)
+                          : HexColor("#E2E2E2"))
                       // .withOpacity(_current == entry.key ? 0.9 : 0.1)
                       ),
                 ),
@@ -102,7 +105,7 @@ class _HomeBannerLandingState extends State<HomeBannerLanding> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
       ],
     );

@@ -14,8 +14,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
   @override
   Widget build(BuildContext context) {
     List<String> carousalList = [
-      "https://picsum.photos/200",
-      "https://picsum.photos/200"
+      "https://static.vecteezy.com/system/resources/previews/001/254/978/original/creative-and-colorful-restaurant-food-social-media-banner-post-vector.jpg",
+      "https://thumbs.dreamstime.com/b/fast-food-creative-poster-design-set-web-graphics-modern-vector-illustration-npremium-quality-logo-concept-pictogram-76858679.jpg",
+      "https://c.neh.tw/thumb/f/720/4913631651168256.jpg"
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +31,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                     "Shopping ",
                     style: TextStyle(
                         color: blackColor,
-                        fontSize: 16.0,
+                        fontSize: 17.0,
                         fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -39,7 +40,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 ),
                 Container(
                   width: 50.0,
-                  height: 2.5,
+                  height: 1,
                   margin: const EdgeInsets.symmetric(
                       vertical: 0.0, horizontal: 2.0),
                   decoration: BoxDecoration(
@@ -74,16 +75,18 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
+                        Expanded(
+                          flex: 0,
+                            child: ClipRRect(
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(14.0),
+                              topLeft: Radius.circular(12.0),
                               topRight: Radius.circular(2.0),
                               bottomLeft: Radius.circular(2.0),
-                              bottomRight: Radius.circular(14.0)),
+                              bottomRight: Radius.circular(12.0)),
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
-                            width: 90,
-                            height: 90,
+                            width: 110,
+                            height: 110,
                             imageUrl: carousalList[index],
                             placeholder: (context, url) => Container(
                               width: MediaQuery.of(context).size.width,
@@ -94,46 +97,110 @@ class _ShoppingPageState extends State<ShoppingPage> {
                               color: HexColor("#8AE2E2E2"),
                             ),
                           ),
-                        ),
+                        ))
+                        ,
                         const SizedBox(
-                          width: 12,
+                          width: 18,
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width-140,
+                        Expanded(
+                            flex: 2,
+
+                            child: SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
                               Text(
-                                "Crackers",
+                                "Biriyani",
                                 style: TextStyle(
                                     color: blackColor,
-                                    fontSize: 14,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.w600),
                               ),
-                              const SizedBox(height: 6,),
+                              const SizedBox(height: 3,),
+
                               Text(
-                                "Crackers are best fun in festival. don't miss it djbvbdfsdfjbhfbhdsbfhbdfhdsbfhdsjbfj",
+                                "Pizza",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    color: blackColor,
+                                    color: textColorSmall,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500),
                               ) ,
-                              const SizedBox(height: 6,),
+                              const SizedBox(height: 3,),
+
                               Text(
-                                "Continue Shopping >",
-                                maxLines: 20,
+                                "Nunkambakkam",
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    color: primaryColor,
+                                    color: textColorSmall,
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w600),
-                              )
+                                    fontWeight: FontWeight.w500),
+                              ) ,
+                              const SizedBox(height: 3,),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.star_rate_rounded, size: 17, color: textColor),
+                                  SizedBox(width: 6,),
+                                  Text(
+                                    "4.6",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600),
+                                  ) , SizedBox(width: 6,),
+                                  Text(
+                                    ".",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600),
+                                  ) , SizedBox(width: 6,),
+                                  Text(
+                                    "₹ 30000 for two",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600),
+                                  ) ,
+                                ],
+                              ),
+                              const SizedBox(height: 6,),
+                              Container(
+                                height: 1.6,
+                                color: grayColorOne,
+                                padding: EdgeInsets.only(right: 6,left: 6),),
+                              const SizedBox(height: 6,),
+
+Row(children: [
+  Icon(Icons.local_fire_department, size: 17, color: primaryColorDarkOne),
+SizedBox(width: 6,),
+  Text(
+    "50% offer upto two",
+    maxLines: 20,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(
+        color: textColorSmall,
+        fontSize: 12,
+        fontWeight: FontWeight.w500),
+  )
+],)
+
                             ],
                           ),
-                        )
+                        ))
+
 
                       ],
                     ),

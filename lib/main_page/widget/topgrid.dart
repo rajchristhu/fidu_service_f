@@ -7,7 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 class TopGrid extends StatelessWidget {
   const TopGrid({Key? key, required this.choice}) : super(key: key);
-  final Choice choice;
+  final String choice;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TopGrid extends StatelessWidget {
                 child: Container(
 
                 padding: const EdgeInsets.only(
-                    right: 10, left: 10, top: 10, bottom: 10),
+                    right: 6, left: 6, top: 6, bottom: 6),
                 child:
                 ClipRRect(
                     borderRadius: const BorderRadius.only(
@@ -37,7 +37,7 @@ class TopGrid extends StatelessWidget {
                 CachedNetworkImage(
                   fit: BoxFit.cover,
                   width: MediaQuery.of(context).size.width,
-                  imageUrl: "https://picsum.photos/200",
+                  imageUrl: choice,
                   placeholder: (context, url) => Container(
                     width: MediaQuery.of(context).size.width,
                     color: HexColor("#8AE2E2E2"),
@@ -53,7 +53,7 @@ class TopGrid extends StatelessWidget {
             Expanded(
                 flex: 0,
                 child: Text(
-              choice.title,
+              "KFC",
               style: TextStyle(
                   color: blackColor,
                   fontSize: 12.0,

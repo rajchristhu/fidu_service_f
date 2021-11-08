@@ -1,3 +1,4 @@
+import 'package:fidu_service/util/background.dart';
 import 'package:fidu_service/util/separate.dart';
 import 'package:fidu_service/util/theme.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'main_page/map/map.dart';
 import 'main_page/shop.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
       title: 'Fidu Service',
       theme: ThemeData(
         primaryColor: primaryColor,
+        splashColor: primaryColor,
+accentColor:primaryColor ,
+        shadowColor: primaryColor,
         textTheme: GoogleFonts.nunitoSansTextTheme(
           Theme.of(context).textTheme,
         ),
@@ -85,6 +88,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+
         key: _scaffoldKey,
         endDrawer: SizedBox(
 
@@ -97,15 +102,28 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
                   height: MediaQuery.of(context).size.height,
                   decoration:  BoxDecoration(
-                    color: whiteColor,
+                    color: whiteColors,
                   ),
                   child: ListView(
 
-                    padding: EdgeInsets.only(top: 20),
                     children: <Widget>[
-                      SafeArea(child:  Container(
-padding: EdgeInsets.only(bottom: 10,left: 10),
-                        child:  Row(
+                      SafeArea(
+                  child:  ClipRRect(
+
+                      borderRadius:
+                      const BorderRadius.only(bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+            // const BorderRadius.all( Radius.circular(18.0)),
+            child:
+                       Container(
+                         decoration: BoxDecoration(
+
+                           border: Border.all(color: grayColor),
+                           borderRadius: BorderRadius.circular(2),
+                         ),
+                        padding: EdgeInsets.only(bottom: 20,left: 10,top: 20),
+
+
+                         child:   Row(
                           //mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -114,9 +132,9 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                               flex: 0,
                               child: CircleAvatar(
                                   radius: 30,
-                                  backgroundImage: NetworkImage('https://via.placeholder.com/140x100')
+                                  backgroundImage: NetworkImage('https://picsum.photos/100')
                               ),),
-                            SizedBox(width: 20,),
+                            SizedBox(width: 15,),
                             Expanded(
                                 flex: 2,
 
@@ -125,13 +143,14 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                                   mainAxisAlignment: MainAxisAlignment.center,
 
                                   children:  [
-                                    Text("Hello!",style: TextStyle(color: primaryColor,fontWeight: FontWeight.w600),),
-                                    Text("Maria Christhu Rajan fjhbfbhbhwebfhjewbfhb",style: TextStyle(overflow: TextOverflow.ellipsis,fontWeight: FontWeight.w600),)
+                                    Text("Hello!",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600,fontSize:15,fontFamily: GoogleFonts.lato().fontFamily),),
+                                    SizedBox(height: 6,),
+                                    Text("Maria Christhu Rajan fjhbfbhbhwebfhjewbfhb",style: TextStyle(color:blackColor,fontFamily: GoogleFonts.lato().fontFamily,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.w600),)
                                   ],)
                             ),
 
                           ],
-                        ),
+                        ),),
 
 
 
@@ -143,7 +162,7 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                           // getLocation();
                         },
                         leading:  Icon(
-                          Icons.history,
+                          Icons.history_rounded,
                           size: 22,
                           color: primaryColor,
                         ),
@@ -151,9 +170,13 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                         //     "99+"
                         // ),
                         title:
-                         Text(
+                        Transform(
+                          transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                          child: Text(
                             "Order History",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
+                        ),
+
 
 
 
@@ -162,17 +185,21 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
 
                       ListTile(
                         onTap: (){},
+
                         leading:  Icon(
-                          Icons.support_agent_rounded,
+                          Icons.support_agent,
                           size: 22,
                           color: primaryColor,
                         ),
                         title:
-
-
-                          Text(
+                        Transform(
+                          transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                          child: Text(
                             "Support",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
+                        ),
+
+
 
 
                       ),
@@ -182,12 +209,16 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                         onTap: (){},
 
                         leading:  Icon(
-                          Icons.contact_support,
+                          Icons.help_outline_rounded,
                           size: 22,
                           color: primaryColor,
                         ),
-                        title:  Text(
-                          "Help",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
+                        title:
+                        Transform(
+                          transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                          child: Text(
+                            "Help",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
+                          ),
                         ),
 
 
@@ -198,13 +229,18 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                       ListTile(
                         onTap: (){},
                         leading:  Icon(
-                          Icons.note_rounded,
+                          Icons.note_outlined,
                           size: 22,
                           color: primaryColor,
                         ),
-                        title:   Text(
+                        title:   Transform(
+                          transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                          child: Text(
                             "Terms and Condition",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
+                        ),
+
+
 
 
 
@@ -214,13 +250,18 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                       ListTile(
                         onTap: (){},
                         leading:  Icon(
-                          Icons.star_rate_rounded,
+                          Icons.star_border_rounded,
                           size: 22,
                           color: primaryColor,
                         ),
-                        title:   Text(
+                        title: Transform(
+                          transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                          child: Text(
                             "Rate the Application",style: TextStyle(color: blackColor,fontWeight: FontWeight.w600),
                           ),
+                        ),
+
+
 
 
 
@@ -230,28 +271,44 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
 
                     ],
                   ),),
-                 Positioned(
-                  bottom: 30,
-                    child: Container(
+
+                ClipPath(
+                  clipper: FooterWaveClipper(),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: orangeGradients,
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.center),
+                    ),
+                    height: MediaQuery.of(context).size.height ,
+                  ),
+                ),
+                Positioned(
+                    bottom: 30,
+                    child:
+
+                    Container(
                       width: MediaQuery.of(context).size.width *
                           0.80,
                       child:  Align(
                         alignment: Alignment.center,
                         child: Container(
-                          child: RichText(
-                            text: TextSpan(
-                              text: 'Created By ',
-                              style: TextStyle(color: blackColor,
-                                  fontSize:10,fontFamily: GoogleFonts.nunitoSans().fontFamily),
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Created By ',
+                                style: TextStyle(color: whiteColors,
+                                    fontSize:12,fontFamily: GoogleFonts.nunitoSans().fontFamily),
 
-                              children:  <TextSpan>[
-                                TextSpan(text: 'CESEAGOD', style: TextStyle(fontWeight: FontWeight.bold,color: primaryColor)),
-                              ],
-                            ),
-                          )
+                                children:  <TextSpan>[
+                                  TextSpan(text: 'CeseaGod', style: TextStyle(fontSize:14,fontFamily: GoogleFonts.nunitoSans().fontFamily,fontWeight: FontWeight.bold,color: whiteColors)),
+                                ],
+                              ),
+                            )
                         ),
                       ),)
-                   )
+                ),
+
               ],
             )
 
@@ -261,7 +318,7 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
         appBar: AppBar(
           toolbarHeight: 60,
           elevation:0.3,
-          shadowColor: blackColor,
+          shadowColor: whiteColor,
           foregroundColor: whiteColor,
           actions: <Widget>[
             IconButton(
@@ -286,13 +343,13 @@ padding: EdgeInsets.only(bottom: 10,left: 10),
                       flex: 0,
                       child: InkWell(
                         child: Icon(
-                          Icons.location_pin,
+                          Icons.pin_drop,
                           color: primaryColor,
                           size: 16,
                         ),
                       )),
                   const SizedBox(
-                    width: 8,
+                    width: 3,
                   ),
                   Expanded(
                       flex: 2,

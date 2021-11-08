@@ -16,15 +16,23 @@ class _TopTrendingState extends State<TopTrending> {
   @override
   Widget build(BuildContext context) {
     const List<Choice> choices = <Choice>[
-      Choice(title: 'Cracker 1', icon: Icons.home),
-      Choice(title: 'Cracker 2', icon: Icons.contacts),
-      Choice(title: 'Cracker 3', icon: Icons.map),
-      Choice(title: 'Cracker 4', icon: Icons.phone),
-      Choice(title: 'Cracker 5', icon: Icons.camera_alt),
-      Choice(title: 'Cracker 6', icon: Icons.settings),
-      Choice(title: 'Cracker 7', icon: Icons.photo_album),
-      Choice(title: 'Cracker 8', icon: Icons.wifi),
-      Choice(title: 'Cracker 9', icon: Icons.wifi),
+      Choice(title: 'KFC',image:"https://blog.onnbikes.com/wp-content/uploads/2018/12/vegetarian-restaurants-in-thrissur-featured.jpg", icon: Icons.home, ),
+      Choice(title: 'mcdonalds',image:"https://media-cdn.tripadvisor.com/media/photo-s/06/17/c7/3f/item-shop.jpg", icon: Icons.home, ),
+     Choice(title: 'KFC',image:"https://www.eatthis.com/wp-content/uploads/sites/4/2019/05/kfc-restaurant-exterior.jpg?quality=82&strip=1&resize=1200%2C675", icon: Icons.home, ),
+      Choice(title: 'mcdonalds',image:"https://m.economictimes.com/thumb/msid-75892416,width-1200,height-900,resizemode-4,imgsize-890927/like-many-other-top-chefs-adria-has-been-sharing-some-of-his-own-recipes-to-encourage-the-home-cooking-revolution-.jpg", icon: Icons.home, ),
+   Choice(title: 'Thalapakatti',image:"https://cdn.doordash.com/media/restaurant/cover/ThalappakattiRestaurant252MilpitasCA.png", icon: Icons.home, ),
+      Choice(title: 'mcdonalds',image:"https://img.traveltriangle.com/blog/wp-content/tr:w-700,h-400/uploads/2017/10/The-Only-Place.jpg", icon: Icons.home, ),
+
+    ];
+    List<String> carousalLists = [
+      "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/05/Indore_Blog-1030x538.jpg",
+      "https://image.freepik.com/free-vector/flat-food-banner-template_23-2149048461.jpg",
+      "https://c.neh.tw/thumb/f/720/4913631651168256.jpg",
+      "https://picsum.photos/200",
+      "https://static.vecteezy.com/system/resources/previews/001/254/978/original/creative-and-colorful-restaurant-food-social-media-banner-post-vector.jpg",
+      "https://thumbs.dreamstime.com/b/fast-food-creative-poster-design-set-web-graphics-modern-vector-illustration-npremium-quality-logo-concept-pictogram-76858679.jpg",
+      "https://c.neh.tw/thumb/f/720/4913631651168256.jpg", "https://static.vecteezy.com/system/resources/previews/001/254/978/original/creative-and-colorful-restaurant-food-social-media-banner-post-vector.jpg",
+      "https://thumbs.dreamstime.com/b/fast-food-creative-poster-design-set-web-graphics-modern-vector-illustration-npremium-quality-logo-concept-pictogram-76858679.jpg",
     ];
     List<String> carousalList = ["https://image.freepik.com/free-vector/beautiful-happy-diwali-crackers-celebration-banner_1017-21664.jpg",
       "https://d2y0eb5zgg2xw9.cloudfront.net/siteImages/homePageBanners/mark-harpur-HUOvKWXEdFY-unsplash.jpg"];
@@ -44,7 +52,7 @@ class _TopTrendingState extends State<TopTrending> {
                   child: Text(
                     "Top Trending",
                     style: TextStyle(
-                        color: blackColor, fontSize: 16.0, fontWeight: FontWeight.w700),
+                        color: blackColor, fontSize: 17.0, fontWeight: FontWeight.w700),
                   ),
                 ),
                 const SizedBox(
@@ -52,7 +60,7 @@ class _TopTrendingState extends State<TopTrending> {
                 ),
                 Container(
                   width: 50.0,
-                  height: 2.5,
+                  height: 1,
                   margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2.0),
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(18)),
@@ -73,15 +81,15 @@ child:GridView.count(
     shrinkWrap: true,
     crossAxisSpacing: 8.0,
     mainAxisSpacing: 8.0,
-    children: List.generate(choices.length, (index) {
+    children: List.generate(carousalLists.length, (index) {
       return Center(
-        child: TopGrid(choice: choices[index]),
+        child: TopGrid(choice: carousalLists[index]),
       );
     }
     )) ,)
         ,
           const SizedBox(
-          height: 40,
+          height: 20,
         ),
       ],
     );
@@ -90,8 +98,9 @@ child:GridView.count(
 
 }
 class Choice {
-  const Choice({required this.title, required this.icon});
+  const Choice({required this.title, required this.icon, required this.image});
   final String title;
+  final String image;
   final IconData icon;
 }
 
