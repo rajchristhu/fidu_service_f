@@ -73,10 +73,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
           _currentPosition!.latitude, _currentPosition!.longitude);
 
       Placemark place = p[0];
-
       setState(() {
         _currentAddress =
-        "${place.locality}, ${place.postalCode}, ${place.country}";
+        "${place.name!=null?place.name+" ,":""}${place.subLocality!=null?place.subLocality+" ,":""}${place.locality} ${place.postalCode}, ${place.country}";
       });
     } catch (e) {
       print(e);
@@ -105,7 +104,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     padding: EdgeInsets.only(top: 20),
                     children: <Widget>[
                       SafeArea(child:  Container(
-padding: EdgeInsets.only(bottom: 0,left: 10),
+padding: EdgeInsets.only(bottom: 10,left: 10),
                         child:  Row(
                           //mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -260,7 +259,7 @@ padding: EdgeInsets.only(bottom: 0,left: 10),
           ),
         ),
         appBar: AppBar(
-          toolbarHeight: 55,
+          toolbarHeight: 60,
           elevation:0.3,
           shadowColor: blackColor,
           foregroundColor: whiteColor,
@@ -301,9 +300,9 @@ padding: EdgeInsets.only(bottom: 0,left: 10),
 "Location",
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                            color: blackColor,
+                            color: dark_blue,
                             fontSize: 12.0,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w600),
                       ))
                 ],
               ),
@@ -316,13 +315,13 @@ padding: EdgeInsets.only(bottom: 0,left: 10),
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     color: blackColor,
-                    fontSize: 13.0,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w600),
               ): Text("--",
               textAlign: TextAlign.start,
               style: TextStyle(
                   color: blackColor,
-                  fontSize: 13.0,
+                  fontSize: 14.0,
                   fontWeight: FontWeight.w600),
             ),
 

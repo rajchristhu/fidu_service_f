@@ -122,7 +122,7 @@ class _CategoryListState extends State<CategoryList> {
                               style: TextStyle(
                                   color: blackColor,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w600),
                             )
                           ],
                         ),

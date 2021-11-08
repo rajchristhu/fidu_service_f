@@ -57,7 +57,7 @@ class TopGrid extends StatelessWidget {
               style: TextStyle(
                   color: blackColor,
                   fontSize: 12.0,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w600),
             ))
             ,
             const SizedBox(
